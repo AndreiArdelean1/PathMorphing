@@ -6,7 +6,8 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+//#import <UIKit/UIKit.h>
 
 //! Project version number for PathMorphing.
 FOUNDATION_EXPORT double PathMorphingVersionNumber;
