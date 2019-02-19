@@ -143,14 +143,20 @@ public extension SubPathDescriptor {
 	
 	/// The center of mass of the subpath.
 	public var centroid: CGPoint {
-		var points = segments
-			.compactMap { $0.mainPoint }
-		points = [startPoint] + points
-		if isClosed {
-			points = points + [endPoint]
+		get {
+			var points = segments
+				.compactMap { $0.mainPoint }
+			points = [startPoint] + points
+			if isClosed {
+				points = points + [endPoint]
+			}
+			
+			return points.centroid
 		}
-		
-		return points.centroid
+		mutating set {
+			let translationVector = newValue.vectorFrom(point: centroid)
+			self = self.translating(by: translationVector)
+		}
 	}
 	
 	/// Returns the subpath by transforming all sengments to bezier paths with two control points.
@@ -207,8 +213,9 @@ public extension SubPathDescriptor {
 	/// - Returns: The subpath by adding 'count' segments.
 	public func addingSegments(numberOfSegmentsToAdd count: Int, weights:[Weight] = []) -> SubPathDescriptor {
 		var path = self
-		var countRemeining = count
-		
+//		let countRemeining = count
+		let segmentsWanted = segments.count + count
+
 		var wrapperArray = SegmentDistanceWrapper.wrapperArray(withStart: startPoint, segments: path.segments, weight: 1)
 		// adding points and weights
 		var currentDistance: CGFloat = 0
@@ -269,7 +276,7 @@ public extension SubPathDescriptor {
 			currentDistance = nextDistance
 		}
 
-		while countRemeining > 0 {
+		while segmentsWanted > wrapperArray.count {
 			guard let (maxIndex, maxValue) = wrapperArray.enumerated().max(by: { $0.element.weightedDistance < $1.element.weightedDistance }) else {
 				
 				break
@@ -288,8 +295,6 @@ public extension SubPathDescriptor {
 				
 				break
 			}
-			
-			countRemeining -= newSegments.count - 1
 		}
 		
 		path.segments = wrapperArray.map { $0.segment }
