@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-import UIKit
+import CoreGraphics
 
 public struct SubPathDescriptor {
 	/// The start point of the subpath.

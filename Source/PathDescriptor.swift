@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 public struct PathDescriptor {
 	/// The subpaths in the path

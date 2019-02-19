@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-import UIKit
+import CoreGraphics
 
 struct BezierPath {
 	/// The points of the bezier path. The first and last point corresponds to the starting and ending point of the path, while the points in between are control points.

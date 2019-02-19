@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-import UIKit
+import CoreGraphics
 
 /// The descriptor for a segment
 public struct PathSegmentDescriptor {

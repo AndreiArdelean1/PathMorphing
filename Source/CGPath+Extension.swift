@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-import UIKit
+import CoreGraphics
 
 extension CGPath {
 	internal func forEach( body: @escaping @convention(block) (CGPathElement) -> Void) {

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 extension Sequence where Iterator.Element == PathSegmentDescriptor {
 	/// Returns the subpaths of the curent segments array.
