@@ -6,7 +6,7 @@
 //  Copyright © 2019 Andrei Ardelean. All rights reserved.
 //
 
-import UIKit
+import CoreGraphics
 
 internal extension CGPoint {
 	static func +(lhs: CGPoint, rhs: CGVector) -> CGPoint {
