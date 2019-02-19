@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "PathMorphing"
-  s.version      = "0.0.1"
-  s.summary      = "PathMorphing provides tools for animating the transition between two CGPaths."
+  s.version      = "0.0.2"
+  s.summary      = "Tools for animating the transition between two CGPaths."
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -91,8 +91,8 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "PathMorphing", "PathMorphing/**/*.{swift}"
-  s.exclude_files = "PathMorphing/Exclude"
+  s.source_files  = "Source/**/*.{swift}"
+  s.exclude_files = "Source/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
 
