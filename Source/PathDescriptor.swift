@@ -31,7 +31,7 @@ public extension PathDescriptor {
 	/// Returns the path by transforming all sengments to bezier paths with two control points.
 	///
 	/// - Returns: The path by transforming all sengments to bezier paths with two control points.
-	public func standardDescriptor() -> PathDescriptor {
+	func standardDescriptor() -> PathDescriptor {
 		var path = self
 		path.subPaths = subPaths.map { $0.standardDescriptor() }
 		return path

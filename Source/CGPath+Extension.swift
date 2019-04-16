@@ -60,6 +60,8 @@ extension CGPath {
 				rawSegments.append(PathSegmentDescriptor(type: element.type,
 														   points: []
 				))
+			@unknown default:
+				break
 			}
 		}
 				

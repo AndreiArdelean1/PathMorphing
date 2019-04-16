@@ -29,6 +29,8 @@ public struct PathSegmentDescriptor {
 			return true
 		case .closeSubpath:
 			return false
+		@unknown default:
+			return false
 		}
 	}
 	

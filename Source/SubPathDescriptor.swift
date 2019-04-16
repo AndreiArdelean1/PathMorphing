@@ -43,6 +43,8 @@ public struct SubPathDescriptor {
 				return true
 			case .closeSubpath:
 				return false
+			@unknown default:
+				return false
 			}
 		})
 		
@@ -110,7 +112,7 @@ public extension SubPathDescriptor {
 	/// Returns the CGPath obtained from the current subpath.
 	///
 	/// - Returns: The CGPath obtained from the current subpath
-	public func cgPath() -> CGPath {
+	func cgPath() -> CGPath {
 		let path = CGMutablePath()
 		path.move(to: startPoint)
 		
@@ -126,6 +128,8 @@ public extension SubPathDescriptor {
 				path.addCurve(to: segment.points[0], control1: segment.points[1], control2: segment.points[2])
 			case .closeSubpath:
 				break
+			@unknown default:
+				break
 			}
 		}
 		
@@ -137,12 +141,12 @@ public extension SubPathDescriptor {
 	}
 	
 	/// A Boolean value indicating whether the subpath has segments.
-	public var hasSegments: Bool {
+	var hasSegments: Bool {
 		return !self.segments.isEmpty
 	}
 	
 	/// The center of mass of the subpath.
-	public var centroid: CGPoint {
+	var centroid: CGPoint {
 		get {
 			var points = segments
 				.compactMap { $0.mainPoint }
@@ -162,7 +166,7 @@ public extension SubPathDescriptor {
 	/// Returns the subpath by transforming all sengments to bezier paths with two control points.
 	///
 	/// - Returns: The subpath by transforming all sengments to bezier paths with two control points.
-	public func standardDescriptor() -> SubPathDescriptor {
+	func standardDescriptor() -> SubPathDescriptor {
 		var currentPath = self
 		currentPath.segments = []
 		var currentPoint = startPoint
@@ -195,6 +199,8 @@ public extension SubPathDescriptor {
 				newSegment = segment
 			case .closeSubpath:
 				newSegment = segment
+			@unknown default:
+				newSegment = segment
 			}
 			
 			currentPoint = segment.mainPoint ?? .zero
@@ -211,9 +217,8 @@ public extension SubPathDescriptor {
 	///   - count: The number of segments to add.
 	///   - weights: The weights of the segments used to decide which segments to split. The default weight of the segment is '1'.
 	/// - Returns: The subpath by adding 'count' segments.
-	public func addingSegments(numberOfSegmentsToAdd count: Int, weights:[Weight] = []) -> SubPathDescriptor {
+	func addingSegments(numberOfSegmentsToAdd count: Int, weights:[Weight] = []) -> SubPathDescriptor {
 		var path = self
-//		let countRemeining = count
 		let segmentsWanted = segments.count + count
 
 		var wrapperArray = SegmentDistanceWrapper.wrapperArray(withStart: startPoint, segments: path.segments, weight: 1)
@@ -327,7 +332,7 @@ public extension SubPathDescriptor {
 	///
 	/// - Parameter shifts: The number of indexes to shift the subpath by.
 	/// - Returns: A subpath obtained by shifting the start with 'shifts' indexes.
-	public func shiftingStart(by shifts: Int) -> SubPathDescriptor {
+	func shiftingStart(by shifts: Int) -> SubPathDescriptor {
 		let count = segments.count
 		
 		guard isClosed && count > 0 && shifts != 0 else {
